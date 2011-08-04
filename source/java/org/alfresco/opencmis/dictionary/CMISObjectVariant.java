@@ -18,22 +18,16 @@
  */
 package org.alfresco.opencmis.dictionary;
 
-import org.apache.chemistry.opencmis.commons.enums.Action;
-
-public interface CMISActionEvaluator
+public enum CMISObjectVariant
 {
-    /**
-     * Gets the CMIS Allowed Action
-     * 
-     * @return
-     */
-    public Action getAction();
-
-    /**
-     * Determines if an action is allowed on an object
-     * 
-     * @param object
-     * @return
-     */
-    public boolean isAllowed(CMISNodeInfo nodeInfo);
+    INVALID_ID, // not a valid object id
+    NOT_EXISTING, // valid id but object doesn't exist
+    NOT_A_CMIS_OBJECT, // object is not mapped to CMIS
+    FOLDER, // object is a folder
+    CURRENT_VERSION, // object is a document (current version)
+    VERSION, // object is a version (not updatable)
+    PWC, // object is a PWC
+    ASSOC, // object is a relationship
+    PERMISSION_DENIED
+    // user has no permissions
 }
