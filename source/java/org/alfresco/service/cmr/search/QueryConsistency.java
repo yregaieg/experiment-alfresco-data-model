@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2010 Alfresco Software Limited.
+ * Copyright (C) 2005-2013 Alfresco Software Limited.
  *
  * This file is part of Alfresco
  *
@@ -16,30 +16,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Alfresco. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.alfresco.repo.content;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
-import org.alfresco.repo.content.encoding.CharsetFinderTest;
+package org.alfresco.service.cmr.search;
 
 /**
- * Suite for content-related tests.
- * 
- * This includes all the tests that need a full context, the
- *  rest are in {@link ContentMinimalContextTestSuite}
- * 
- * @author Derek Hulley
+ * @author Andy
+ *
  */
-public class DataModelContentTestSuite extends TestSuite
+public enum QueryConsistency
 {
-    @SuppressWarnings("unchecked")
-    public static Test suite() 
-    {
-        TestSuite suite = new TestSuite();
-        
-        suite.addTestSuite(CharsetFinderTest.class);
-        suite.addTestSuite(MimetypeMapTest.class);
-        return suite;
-    }
+    EVENTUAL, TRANSACTIONAL, DEFAULT, TRANSACTIONAL_IF_POSSIBLE;
 }
