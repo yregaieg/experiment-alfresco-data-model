@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Alfresco. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.alfresco.repo.search.impl.lucene;
+package org.alfresco.repo.search.adaptor.lucene;
 
 import java.util.List;
 
 import org.alfresco.repo.search.impl.querymodel.FunctionEvaluationContext;
 import org.alfresco.repo.search.impl.querymodel.Ordering;
+import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.search.SearchParameters;
-import org.apache.lucene.queryParser.ParseException;
 
 /**
  * Adaptor class principally to wrap lucene parser implementations and encapsulate changes between lucene versions
@@ -217,5 +217,11 @@ public interface LuceneQueryParserAdaptor<Q, S, E extends Throwable>
      * 
      * @return
      */
-    Q getMatchAllNodesQuery(); 
+    Q getMatchAllNodesQuery();
+
+    /**
+     * @param propertyDef
+     * @return
+     */
+    String getDatetimeSortField(String field, PropertyDefinition propertyDef); 
 }

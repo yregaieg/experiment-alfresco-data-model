@@ -1,6 +1,5 @@
-
 /*
- * Copyright (C) 2005-2010 Alfresco Software Limited.
+ * Copyright (C) 2005-2014 Alfresco Software Limited.
  *
  * This file is part of Alfresco
  *
@@ -17,29 +16,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Alfresco. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.alfresco.repo.search.impl.lucene;
+package org.alfresco.repo.search.adaptor.lucene;
 
 /**
- * Functions that can be applied to lucene fields
- * 
- * Currently upper and lower that perform a case insensitive match for untokenised fields.
- * (If the field is tokenised the match should already be case insensitive.)
- * 
- * @author andyh
+ * @author Andy
  *
  */
-public enum LuceneFunction
+public interface LuceneQueryParserExpressionAdaptor<Q, E extends Throwable>
 {
-    /**
-     * Match as if the field was converted to upper case.
-     */
-    UPPER, 
-    /**
-     * Match as if the field was converted to lower case.
-     */
-    LOWER, 
-    /**
-     * A normal lucene field match.
-     */
-    FIELD;
-}   
+    public void addRequired(Q q) throws E;
+    public void addExcluded(Q q) throws E;
+    public void addOptional(Q q) throws E;
+    public void addRequired(Q q, float boost) throws E;
+    public void addExcluded(Q q, float boost) throws E;
+    public void addOptional(Q q, float boost) throws E;
+    public Q getQuery() throws E;
+    public Q getNegatedQuery() throws E;
+}
