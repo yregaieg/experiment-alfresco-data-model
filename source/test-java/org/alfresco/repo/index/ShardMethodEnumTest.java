@@ -23,38 +23,44 @@
  * along with Alfresco. If not, see <http://www.gnu.org/licenses/>.
  * #L%
  */
-package org.alfresco.repo.index.shard;
+
+package org.alfresco.repo.index;
+
+import org.alfresco.repo.index.shard.ShardMethodEnum;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 /**
- * Enum that details sharding type
- * @author Andy
+ * Unit test to verify enum works as expected
  * @author Michael Suzuki
  *
  */
-public enum ShardMethodEnum
+public class ShardMethodEnumTest
 {
-    MOD_ACL_ID, 
-    MOD_DBID,
-    UNKOWN;
-    
-    public static ShardMethodEnum getShardMethod(String shardMethod)
+    @Test
+    public void testTypeACL()
     {
-        if(shardMethod == null)
-        {
-            return UNKOWN;
-        }
-        ShardMethodEnum shardMethodEnum;
-        switch (shardMethod)
-        {
-        case "MOD_ACL_ID":
-            shardMethodEnum = MOD_ACL_ID;
-            break;
-        case "MOD_DBID":
-            shardMethodEnum = MOD_DBID;
-            break;
-        default:
-            shardMethodEnum = UNKOWN;
-            break;
-            }
-        return shardMethodEnum;
+        Assert.assertEquals(ShardMethodEnum.MOD_ACL_ID, ShardMethodEnum.getShardMethod("MOD_ACL_ID"));
+    }
+    @Test
+    public void testTypeDBID()
+    {
+        Assert.assertEquals(ShardMethodEnum.MOD_DBID, ShardMethodEnum.getShardMethod("MOD_DBID"));
+    }
+    @Test
+    public void testUnknown()
+    {
+        Assert.assertEquals(ShardMethodEnum.UNKOWN, ShardMethodEnum.getShardMethod("MOD_ACL"));
+    }
+    @Test
+    public void testNull()
+    {
+        Assert.assertEquals(ShardMethodEnum.UNKOWN, ShardMethodEnum.getShardMethod(null));
+    }
+    @Test
+    public void testEmpty()
+    {
+        Assert.assertEquals(ShardMethodEnum.UNKOWN, ShardMethodEnum.getShardMethod(""));
     }
 }
